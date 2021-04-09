@@ -18,7 +18,6 @@ You will need an Ethereum account. I'd suggest you get [MetaMask](https://medium
 ## Get yourself some Ethers
 You will need some Ethers to perform the transactions that we are about to make. In order to an Ether (which will be more than enough) head towards https://faucet.ropsten.be/, and request Ethers on the Ropsten network.
 
-### Gas vs Ether?
 
 ## Setup your computer
 To setup your environment laptop, simply make sure you have Node and yarn installed. Next install the required packages, e.g. `yarn install`.
