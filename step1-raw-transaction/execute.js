@@ -19,10 +19,10 @@ const account_from = {
 };
 
 // Set the actions we'd like to perform
-const myData = contract.methods.greet("Written by Nathan").encodeABI();
+const myData = contract.methods.greet(process.env.MESSAGE).encodeABI();
 
-const deploy = async () => {
-  console.log(`Attempting to send transaction from ${account_from.address} to ${contract_to.address}`);
+const runTransaction = async () => {
+  console.log(`Attempting to send the message '${process.env.MESSAGE}' from ${account_from.address} to ${contract_to.address}`);
   
   try {
     const txCount = await web3.eth.getTransactionCount(account_from.address);
@@ -39,7 +39,7 @@ const deploy = async () => {
       account_from.privateKey
     );
 
-    // Send Tx and Wait for Receipt
+    // Send Tx and Wait for Receipt -- you must wait until the transaction is mined
     const createReceipt = await web3.eth.sendSignedTransaction(
       createTransaction.rawTransaction
     );
@@ -47,10 +47,19 @@ const deploy = async () => {
     console.log(
       `Transaction successful with hash: ${createReceipt.transactionHash}`
     );
-    
+
+    console.log(`Attempting to verify what has been written as greeting to the contract`);
+    const messageWritten = await web3.eth.call({
+      // Note that we do not send any gas, for it's not needed on a call
+      to: contract_to.address,
+      data: contract.methods.getGreeting().encodeABI()
+    })
+    // Todo: Why is there a space in front of the expected message?
+    console.log(`The message '${web3.utils.hexToUtf8(messageWritten)}' has been written to the contract.`);
+
   } catch (error) {
     console.log(error);
   }
 };
 
-deploy();
+runTransaction();
