@@ -13,11 +13,10 @@ To circumvent this, [we'll consider a provider](https://decrypt.co/resources/wha
 To use Infura, create an account [here](https://infura.io/). Next you are requested to create a project, if you're not, simply head towards 'Ethereum' in the left pane of the dashboard and create a project. When you have created a project, you can view the 'Settings' tab where you'll find endpoints for the different Ethereum chains. In particular, for this script we'll use the Ropsten network, so consider the corresponding endpoint, which you'll need in the configuration below.
 
 ## Create an ethereum account
-You will need an Ethereum account. I'd suggest you get [MetaMask](https://medium.com/@seanschoi/what-is-metamask-really-what-is-it-7bc1bf48c75), which is, among others, a wallet and thus creates an address for you on the several Ethereum blockchains. It furthermore allows for executing transactions 
+You will need an Ethereum account. I'd suggest you get [MetaMask](https://medium.com/@seanschoi/what-is-metamask-really-what-is-it-7bc1bf48c75), which is, among others, a wallet and thus creates an address for you on the several Ethereum blockchains. It furthermore allows for executing transactions. Note that, among others, you'll get a wallet for the Ropsten blockchain as well as for the mainnet.
 
 ## Get yourself some Ethers
 You will need some Ethers to perform the transactions that we are about to make. In order to an Ether (which will be more than enough) head towards https://faucet.ropsten.be/, and request Ethers on the Ropsten network.
-
 
 ## Setup your computer
 To setup your environment laptop, simply make sure you have Node and yarn installed. Next install the required packages, e.g. `yarn install`.
@@ -28,10 +27,25 @@ Create a `.env` file with specs as follows:
 PROVIDER=[Your provider endpoint]
 ACCOUNT_ADDRESS=[Your address (starts with 0x)]
 PRIVATE_KEY=[Your private key]
+MESSAGE=[The greeting message you'd like to send to the contract]
 ```
 
-Interested to see what happend, check it out on .... using the hash
+## Run the script
+That's it, you are ready to run the script. Head to the command line and `cd` to this subrepo. From there simply execute:
+
+```
+node execute.js
+```
+
+You'll see the script starting and if everything goes well you'll see a the response
+
+```
+Transaction successful with hash: [some-hash]
+```
+You can now verify that the transaction has indeed been completed and is stored in the blockchain. This information can be seen here on the [Ropsten Etherscan webpage](https://ropsten.etherscan.io/). Search for the `hash` and you will see all specifications of your transaction. Well done!
 
 # Open questions
 * Raw transaction vs signed transaction, what's the difference and where can we see this difference?  
 * As we'll see later on, we can use `web3.eth.getAccounts().then(console.log)` to list all accounts that can be used (not sure where these come from). However if we run this here it won't work immediately. Is this a truffle thing?
+* What does it mean for a transaction to be mined?
+* Why do we see a space in front of the resulting message?
