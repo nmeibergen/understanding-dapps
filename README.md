@@ -41,6 +41,13 @@ Best is thus to simply check what the current prices are, which you can find on 
 ## More to read
 A great article on Ether, gas, gas-price, wei, etc. can be found [here](https://cryptotesters.com/blog/ethereum-gas).
 
+# The contract setup
+Contracts are written in the language `Solidity`: it's mere purpose of existence is for writing contracts. The best source of information about writing contracts can be found here in the [dedicated docs](https://docs.soliditylang.org/en/v0.8.3/).
+
+## Function 
+## Transactions vs calls
+One may here about the different methods called transactions and calls, these actually refer to state-changing functions and respectively non-state-changing functions. If a state is changed by a function the rest of the blockchain network must be informed. For a non-state-changing operation that is not needed, execution is faster and doesn't require the involvement of all nodes. Therefore transaction will cost you gas, whereas calls wont. For more information on this topic check out [this](https://blog.b9lab.com/calls-vs-transactions-in-ethereum-smart-contracts-62d6b17d0bc2) article.
+
 # Open questions
 * How is a block created? What does it take to create one? Why can't we simply create a 'false' transaction saying that someone paid me a lot?
 
